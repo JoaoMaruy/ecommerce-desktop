@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.tds.telalogin.TelaGerenciamentosUsuariosController">
+   <top>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" style="-fx-font-size: 20px; -fx-padding: 10px; -fx-font-weight: 800;" text="Gerenciamento de Usuários" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <TableView fx:id="tabelaUsuarios" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn id="colNomeCompleto" fx:id="colNomeCompleto" prefWidth="131.0" text="Nome Completo" />
+          <TableColumn id="colNomeUsuario" fx:id="colNomeUsuario" prefWidth="126.0" text="Usuário" />
+            <TableColumn id="colEmail" fx:id="colEmail" minWidth="5.0" prefWidth="92.0" text="E-mail" />
+            <TableColumn id="colCpf" fx:id="colCpf" prefWidth="104.0" text="CPF" />
+        </columns>
+      </TableView>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-spacing: 10;" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#abrirTelaCadastroUsuario" style="-fx-background-color: blue;" text="+ Novo" textFill="WHITE" />
+            <Button mnemonicParsing="false" onAction="#editarUsuario" style="-fx-background-color: #E1C826;" text="Editar" textFill="WHITE" />
+            <Button mnemonicParsing="false" onAction="#excluirUsuario" style="-fx-background-color: red;" text="Excluir" textFill="WHITE" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
