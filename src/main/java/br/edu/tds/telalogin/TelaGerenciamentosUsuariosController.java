@@ -4,8 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -16,24 +15,22 @@ import java.util.ResourceBundle;
 
 public class TelaGerenciamentosUsuariosController implements Initializable {
 
-    @FXML
-    private TableView<Usuario> tabelaUsuarios;
+    @FXML private TableView<Usuario> tabelaUsuarios;
+    @FXML private TableColumn<Usuario, String> colNomeCompleto;
+    @FXML private TableColumn<Usuario, String> colNomeUsuario;
+    @FXML private TableColumn<Usuario, String> colEmail;
+    @FXML private TableColumn<Usuario, String> colCpf;
 
-    @FXML
-    private TableColumn<Usuario, String> colNomeCompleto;
+    // Campos de entrada na mesma tela (Certifique-se de que os fx:id no FXML sejam estes)
+    @FXML private TextField txtNomeCompleto;
+    @FXML private TextField txtNomeUsuario;
+    @FXML private TextField txtEmail;
+    @FXML private TextField txtCpf;
 
-    @FXML
-    private TableColumn<Usuario, String> colNomeUsuario;
-
-    @FXML
-    private TableColumn<Usuario, String> colEmail;
-
-    @FXML
-    private TableColumn<Usuario, String> colCpf;
+    private Usuario usuarioSelecionadoParaEdicao;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // AJUSTADO: Os nomes devem ser iguais aos atributos da sua classe Usuario (NomeCompleto, NomeUsuario, etc)
         colNomeCompleto.setCellValueFactory(new PropertyValueFactory<>("NomeCompleto"));
         colNomeUsuario.setCellValueFactory(new PropertyValueFactory<>("NomeUsuario"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
@@ -44,7 +41,6 @@ public class TelaGerenciamentosUsuariosController implements Initializable {
 
     private void carregarUsuarios() {
         ObservableList<Usuario> lista = FXCollections.observableArrayList();
-        // AJUSTADO: Verifique se no banco é 'usuarios' (plural) conforme seu DAO sugeria
         String sql = "SELECT * FROM usuarios"; 
 
         try (Connection conn = Conexao.conectar();
@@ -53,27 +49,69 @@ public class TelaGerenciamentosUsuariosController implements Initializable {
 
             while (rs.next()) {
                 Usuario u = new Usuario();
-                // AJUSTADO: getString deve usar o nome exato da COLUNA no banco de dados
                 u.setNomeCompleto(rs.getString("nomeCompleto"));
                 u.setNomeUsuario(rs.getString("nomeUsuario"));
                 u.setEmail(rs.getString("email"));
                 u.setCPF(rs.getString("CPF"));
-
                 lista.add(u);
             }
-
             tabelaUsuarios.setItems(lista);
 
         } catch (Exception e) {
-            System.err.println("Erro ao carregar usuários: " + e.getMessage());
+            mostrarAlerta("Erro ao carregar usuários: " + e.getMessage());
         }
     }
 
+    // MÉTODO EDITAR: Agora preenche os campos locais em vez de trocar de tela
     @FXML
-    private void abrirTelaCadastroUsuario() throws Exception {
-        // AJUSTADO: O nome deve ser IDÊNTICO ao arquivo em resources (ex: TelaCadastroUsuario)
-        // Se o arquivo for "TelaCadastroUsuario.fxml", use "TelaCadastroUsuario"
-        App.setRoot("TelaCadastroUsuario"); 
+    private void editarUsuario() {
+        usuarioSelecionadoParaEdicao = tabelaUsuarios.getSelectionModel().getSelectedItem();
+
+        if (usuarioSelecionadoParaEdicao == null) {
+            mostrarAlerta("Selecione um usuário na tabela para editar.");
+            return;
+        }
+
+        // Preenche os campos para edição
+        txtNomeCompleto.setText(usuarioSelecionadoParaEdicao.getNomeCompleto());
+        txtNomeUsuario.setText(usuarioSelecionadoParaEdicao.getNomeUsuario());
+        txtEmail.setText(usuarioSelecionadoParaEdicao.getEmail());
+        txtCpf.setText(usuarioSelecionadoParaEdicao.getCPF());
+
+        // Desabilita o ID (nomeUsuario) para evitar alteração da chave primária
+        txtNomeUsuario.setDisable(true);
+        
+        mostrarAlerta("Dados carregados! Altere as informações e clique em Salvar.");
+    }
+
+    // NOVO MÉTODO: Para confirmar a alteração no banco
+    @FXML
+    private void salvarAlteracoes() {
+        if (usuarioSelecionadoParaEdicao == null) {
+            mostrarAlerta("Nenhum usuário está sendo editado no momento.");
+            return;
+        }
+
+        String sql = "UPDATE usuarios SET nomeCompleto = ?, email = ?, CPF = ? WHERE nomeUsuario = ?";
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, txtNomeCompleto.getText());
+            stmt.setString(2, txtEmail.getText());
+            stmt.setString(3, txtCpf.getText());
+            stmt.setString(4, usuarioSelecionadoParaEdicao.getNomeUsuario());
+
+            stmt.executeUpdate();
+            
+            mostrarAlerta("Usuário atualizado com sucesso!");
+            
+            limparCampos();
+            carregarUsuarios();
+
+        } catch (Exception e) {
+            mostrarAlerta("Erro ao salvar: " + e.getMessage());
+        }
     }
 
     @FXML
@@ -81,11 +119,10 @@ public class TelaGerenciamentosUsuariosController implements Initializable {
         Usuario selecionado = tabelaUsuarios.getSelectionModel().getSelectedItem();
 
         if (selecionado == null) {
-            System.out.println("Selecione um usuário na tabela para excluir.");
+            mostrarAlerta("Selecione um usuário para excluir.");
             return;
         }
 
-        // AJUSTADO: SQL para deletar usando a coluna correta do banco
         String sql = "DELETE FROM usuarios WHERE nomeUsuario = ?"; 
 
         try (Connection conn = Conexao.conectar();
@@ -94,26 +131,35 @@ public class TelaGerenciamentosUsuariosController implements Initializable {
             stmt.setString(1, selecionado.getNomeUsuario());
             stmt.executeUpdate();
 
+            mostrarAlerta("Usuário removido com sucesso!");
             carregarUsuarios();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            mostrarAlerta("Erro ao excluir: " + e.getMessage());
         }
     }
 
-    @FXML
-private void editarUsuario() throws Exception {
-    Usuario selecionado = tabelaUsuarios.getSelectionModel().getSelectedItem();
-
-    if (selecionado == null) {
-        System.out.println("Selecione um usuário para editar.");
-        return;
+    private void limparCampos() {
+        txtNomeCompleto.clear();
+        txtNomeUsuario.clear();
+        txtEmail.clear();
+        txtCpf.clear();
+        txtNomeUsuario.setDisable(false);
+        usuarioSelecionadoParaEdicao = null;
     }
 
-    // 1. Salva o usuário na sessão para a outra tela ler
-    Sessao.usuarioSelecionado = selecionado;
+    // Mantenha este se ainda quiser ir para a tela de novo cadastro
+    @FXML
+    private void abrirTelaCadastroUsuario() throws Exception {
+        App.setRoot("TelaCadastroUsuario"); 
+    }
 
-    // 2. Abre a tela de cadastro (que agora vai servir para editar também)
-    App.setRoot("TelaCadastroUsuario"); 
-}
+    // O ALERTA FUNCIONAL SOLICITADO
+    private void mostrarAlerta(String mensagem) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Sistema");
+        alert.setHeaderText(null);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
+    }
 }

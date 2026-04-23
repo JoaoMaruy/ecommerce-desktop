@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.tds.telalogin.TelaGerenciamentosUsuariosController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.tds.telalogin.TelaGerenciamentosUsuariosController">
    <top>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" style="-fx-font-size: 20px; -fx-padding: 10px; -fx-font-weight: 800;" text="Gerenciamento de Usuários" textFill="WHITE">
                <font>
@@ -20,22 +23,56 @@
          </children>
       </HBox>
    </top>
+   
+   <left>
+      <VBox prefWidth="250.0" spacing="10.0" style="-fx-background-color: #f4f4f4; -fx-border-color: #cccccc; -fx-border-width: 0 1 0 0;" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Dados do Usuário">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label text="Nome Completo" />
+            <TextField fx:id="txtNomeCompleto" promptText="Nome completo" />
+            
+            <Label text="Usuário (Login)" />
+            <TextField fx:id="txtNomeUsuario" promptText="Nome de usuário" />
+            
+            <Label text="E-mail" />
+            <TextField fx:id="txtEmail" promptText="exemplo@email.com" />
+            
+            <Label text="CPF" />
+            <TextField fx:id="txtCpf" promptText="000.000.000-00" />
+            
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#salvarAlteracoes" style="-fx-background-color: green;" text="Salvar Alterações" textFill="WHITE">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </VBox>
+   </left>
+
    <center>
       <TableView fx:id="tabelaUsuarios" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn id="colNomeCompleto" fx:id="colNomeCompleto" prefWidth="131.0" text="Nome Completo" />
-          <TableColumn id="colNomeUsuario" fx:id="colNomeUsuario" prefWidth="126.0" text="Usuário" />
-            <TableColumn id="colEmail" fx:id="colEmail" minWidth="5.0" prefWidth="92.0" text="E-mail" />
-            <TableColumn id="colCpf" fx:id="colCpf" prefWidth="104.0" text="CPF" />
+          <TableColumn fx:id="colNomeCompleto" prefWidth="180.0" text="Nome Completo" />
+          <TableColumn fx:id="colNomeUsuario" prefWidth="120.0" text="Usuário" />
+            <TableColumn fx:id="colEmail" prefWidth="150.0" text="E-mail" />
+            <TableColumn fx:id="colCpf" prefWidth="120.0" text="CPF" />
         </columns>
       </TableView>
    </center>
+
    <bottom>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-spacing: 10;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" style="-fx-spacing: 20;" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#abrirTelaCadastroUsuario" style="-fx-background-color: blue;" text="+ Novo" textFill="WHITE" />
-            <Button mnemonicParsing="false" onAction="#editarUsuario" style="-fx-background-color: #E1C826;" text="Editar" textFill="WHITE" />
-            <Button mnemonicParsing="false" onAction="#excluirUsuario" style="-fx-background-color: red;" text="Excluir" textFill="WHITE" />
+            <Button mnemonicParsing="false" onAction="#abrirTelaCadastroUsuario" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: blue;" text="+ Novo" textFill="WHITE" />
+            <Button mnemonicParsing="false" onAction="#editarUsuario" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #E1C826;" text="Editar" textFill="WHITE" />
+            <Button mnemonicParsing="false" onAction="#excluirUsuario" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: red;" text="Excluir" textFill="WHITE" />
          </children>
       </HBox>
    </bottom>
