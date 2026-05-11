@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.tds.telalogin.TelaCadastroUsuarioController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.tds.ecommerce.TelaCadastroUsuarioController">
    <left>
       <AnchorPane prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: #121212;" BorderPane.alignment="CENTER">
          <children>
@@ -27,41 +27,33 @@
             </ImageView>
             <Pane layoutX="124.0" layoutY="143.0" prefHeight="360.0" prefWidth="567.0" style="-fx-background-color: rgba(0, 0, 0, 0.85); -fx-background-radius: 10;">
                <children>
-                  <!-- Nome Completo -->
                   <TextField fx:id="txtNomeCompleto" layoutX="154.0" layoutY="70.0" prefHeight="26.0" prefWidth="260.0" promptText="Nome Completo" />
                   <Label fx:id="lblErroNomeCompleto" layoutX="154.0" layoutY="96.0" text="Campo obrigatório!" textFill="RED" visible="false" />
 
-                  <!-- Nome de Usuário -->
                   <TextField fx:id="txtNovoUsuario" layoutX="154.0" layoutY="110.0" prefHeight="26.0" prefWidth="260.0" promptText="Nome de Usuário" />
                   <Label fx:id="lblErroUsuario" layoutX="154.0" layoutY="136.0" text="Campo obrigatório!" textFill="RED" visible="false" />
 
-                  <!-- E-mail -->
                   <TextField fx:id="txtEmail" layoutX="154.0" layoutY="150.0" prefHeight="26.0" prefWidth="260.0" promptText="E-mail" />
                   <Label fx:id="lblErroEmail" layoutX="154.0" layoutY="176.0" text="Campo obrigatório!" textFill="RED" visible="false" />
 
-                  <!-- CPF -->
                   <TextField fx:id="txtCPF" layoutX="154.0" layoutY="190.0" prefHeight="26.0" prefWidth="260.0" promptText="CPF" />
                   <Label fx:id="lblErroCPF" layoutX="154.0" layoutY="216.0" text="Campo obrigatório!" textFill="RED" visible="false" />
 
-                  <!-- Senha -->
                   <PasswordField fx:id="txtNovaSenha" layoutX="154.0" layoutY="230.0" prefHeight="26.0" prefWidth="260.0" promptText="Senha" />
                   <Label fx:id="lblErroSenha" layoutX="154.0" layoutY="256.0" text="Campo obrigatório!" textFill="RED" visible="false" />
 
-                  <!-- Ícones -->
                   <FontIcon iconColor="WHITE" iconLiteral="fas-user" iconSize="20" layoutX="128.0" layoutY="90.0" />
                   <FontIcon iconColor="WHITE" iconLiteral="fas-user" iconSize="20" layoutX="128.0" layoutY="130.0" />
                   <FontIcon iconColor="WHITE" iconLiteral="fas-envelope" iconSize="20" layoutX="127.0" layoutY="170.0" />
                   <FontIcon iconColor="WHITE" iconLiteral="fas-id-card" iconSize="20" layoutX="127.0" layoutY="210.0" />
                   <FontIcon iconColor="WHITE" iconLiteral="fas-lock" iconSize="20" layoutX="127.0" layoutY="250.0" text="" />
 
-                  <!-- Título -->
                   <Text fill="WHITE" layoutX="188.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crie sua conta">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
                   </Text>
 
-                  <!-- Botão Cadastrar -->
                   <Button layoutX="196.0" layoutY="290.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="26.0" prefWidth="182.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" text="Cadastrar">
                      <effect>
                         <Reflection topOpacity="0.04" />
@@ -71,7 +63,6 @@
                      </font>
                   </Button>
 
-                  <!-- Links -->
                   <Hyperlink layoutX="325.0" layoutY="325.0" onAction="#abrirTelaLogin" text="Já possui conta?" textFill="RED" />
                   <CheckBox layoutX="128.0" layoutY="328.0" mnemonicParsing="false" text="Lembre de mim" textFill="WHITE" />
                </children>

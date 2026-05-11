@@ -1,4 +1,4 @@
-package br.edu.tds.telalogin;
+package br.edu.tds.ecommerce;
 
 public class Usuario {
     private String NomeCompleto;

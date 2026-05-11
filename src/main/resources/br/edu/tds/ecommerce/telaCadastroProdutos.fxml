@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.tds.ecommerce.TelaCadastroProdutosController">
+
+   <left>
+      <AnchorPane prefWidth="250" style="-fx-background-color: #0598ff;">
+         <children>
+            <Text fill="WHITE" layoutX="20" layoutY="120" text="Produtos E-commerce">
+               <font><Font name="System Bold" size="22" /></font>
+            </Text>
+            <Text fill="WHITE" layoutX="20" layoutY="180" text="Cadastre produtos para sua loja virtual">
+               <font><Font size="14" /></font>
+            </Text>
+            <FontIcon iconLiteral="fab-shopify" iconColor="WHITE" iconSize="40" layoutX="40" layoutY="370" />
+            <FontIcon iconLiteral="fas-shopping-cart" iconColor="WHITE" iconSize="40" layoutX="105" layoutY="370" />
+            <FontIcon iconLiteral="fas-box-open" iconColor="WHITE" iconSize="40" layoutX="175" layoutY="370" />
+         </children>
+      </AnchorPane>
+   </left>
+
+   <center>
+      <AnchorPane prefWidth="450">
+         <children>
+            <FontIcon iconLiteral="fas-box" iconColor="#0598ff" iconSize="50" layoutX="190" layoutY="80" />
+            <Text fill="#0598ff" layoutX="120" layoutY="120" text="Cadastrar Produto">
+               <font><Font size="25" /></font>
+            </Text>
+
+            <TextField fx:id="txtNome" layoutX="70" layoutY="160" prefWidth="320" promptText="Nome do Produto" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0 0 2 0;" />
+            <FontIcon iconLiteral="fas-box" iconColor="#0598ff" iconSize="18" layoutX="40" layoutY="180" />
+
+            <ComboBox fx:id="cbCategoria" layoutX="70" layoutY="210" prefWidth="320" promptText="Selecione a Categoria" />
+            <FontIcon iconLiteral="fas-tags" iconColor="#0598ff" iconSize="18" layoutX="40" layoutY="230" />
+
+            <TextField fx:id="txtPreco" layoutX="70" layoutY="260" prefWidth="140" promptText="Preço" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0 0 2 0;" />
+            <FontIcon iconLiteral="fas-dollar-sign" iconColor="#0598ff" iconSize="18" layoutX="40" layoutY="280" />
+            
+            <TextField fx:id="txtQuantidade" layoutX="270" layoutY="260" prefWidth="120" promptText="Qtd" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0 0 2 0;" />
+            <FontIcon iconLiteral="fas-cubes" iconColor="#0598ff" iconSize="18" layoutX="240" layoutY="280" />
+
+            <TextField fx:id="txtImagem" layoutX="70" layoutY="310" prefWidth="320" promptText="URL da imagem" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0 0 2 0;" />
+            <FontIcon iconLiteral="fas-image" iconColor="#0598ff" iconSize="18" layoutX="40" layoutY="330" />
+
+            <TextArea fx:id="txtDescricao" layoutX="70" layoutY="360" prefHeight="60" prefWidth="320" promptText="Descrição do Produto" />
+
+            <CheckBox fx:id="chkAtivo" layoutX="70" layoutY="440" text="Produto Ativo" selected="true" />
+
+            <Button layoutX="100" layoutY="480" onAction="#salvarProduto" prefWidth="120" style="-fx-background-color: #0598ff; -fx-text-fill: white; -fx-font-weight: bold;" text="CADASTRAR" />
+            <Button layoutX="230" layoutY="480" onAction="#limparCampos" prefWidth="120" style="-fx-background-color: #666; -fx-text-fill: white; -fx-font-weight: bold;" text="LIMPAR" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

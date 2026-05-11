@@ -1,4 +1,4 @@
-package br.edu.tds.telalogin;
+package br.edu.tds.ecommerce;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +21,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("telaGerenciamentoUsuarios"), 700, 500);
+        scene = new Scene(loadFXML("telaCadastroProdutos"), 700, 500);
         stage.setScene(scene);
         stage.show();
     }
@@ -32,7 +32,7 @@ public class App extends Application {
 
   private static Parent loadFXML(String fxml) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(
-        App.class.getResource("/br/edu/tds/telalogin/" + fxml + ".fxml")
+        App.class.getResource("/br/edu/tds/ecommerce/" + fxml + ".fxml")
     );
     return fxmlLoader.load();
 }
