@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class Conexao {
 
     // Configurações do Banco de Dados - Ajuste conforme seu ambiente
-    private static final String DATABASE = "ecommerce"; // Nome do banco de dados
+    private static final String DATABASE = "tela_login"; // Nome do banco de dados
     private static final String URL = "jdbc:mysql://localhost:3306/" + DATABASE + "?useTimezone=true&serverTimezone=UTC";
     private static final String USER = "root";
     private static final String PASSWORD = "ifsuldeminas";
