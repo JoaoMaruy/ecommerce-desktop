@@ -1,5 +1,7 @@
 br/edu/tds/ecommerce/UsuarioDAO.class
 br/edu/tds/ecommerce/TelaCadastroUsuarioController.class
+br/edu/tds/ecommerce/TelaGerenciamentoProdutosController$Produto.class
+br/edu/tds/ecommerce/TelaGerenciamentoProdutosController.class
 br/edu/tds/ecommerce/Usuario.class
 br/edu/tds/ecommerce/TelaGerenciamentosUsuariosController.class
 br/edu/tds/ecommerce/Produto.class
